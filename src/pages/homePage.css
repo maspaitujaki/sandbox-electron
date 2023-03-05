@@ -1,0 +1,15 @@
+.title {
+    text-align: center;
+}
+
+.title h1 {
+    color: #CE0000;
+    -webkit-text-stroke: 0.5px #003c62;
+}
+
+.section{
+    margin: 0 auto;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
