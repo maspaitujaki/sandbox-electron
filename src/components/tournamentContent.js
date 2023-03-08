@@ -24,7 +24,7 @@ const createdTournament = [
     }
 ]
 
-export const HomePage = () =>{
+export const TournamentContent = () =>{
     return(
         <Box>
             <Box>
