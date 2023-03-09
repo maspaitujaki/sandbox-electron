@@ -1,35 +1,63 @@
 import { Heading, Box, Divider, TableContainer,Table, TableCaption,Thead,Tr,Th,Tbody,Td,Tfoot, Text, HStack, Button, Spacer} from "@chakra-ui/react"
+import { useEffect, useState } from "react"
 
-const players = [
-    {
-        ID : 'P01',
-        fName : 'Dimas',
-        lName : 'Muzaki'
-    },
-    {
-        ID : 'P02',
-        fName : 'Diclo',
-        lName : 'Fenac'
-    },
-    {
-        ID : 'P03',
-        fName : 'Diethy',
-        lName : 'Lamine'
-    },
-    {
-        ID : 'P04',
-        fName : 'Pairing',
-        lName : 'System'
-    },
-    {
-        ID : 'P05',
-        fName : 'Git',
-        lName : 'Graph'
-    },
-]
+// const players = [
+//     {
+//         ID : 'P01',
+//         fName : 'Dimas',
+//         lName : 'Muzaki'
+//     },
+//     {
+//         ID : 'P02',
+//         fName : 'Diclo',
+//         lName : 'Fenac'
+//     },
+//     {
+//         ID : 'P03',
+//         fName : 'Diethy',
+//         lName : 'Lamine'
+//     },
+//     {
+//         ID : 'P04',
+//         fName : 'Pairing',
+//         lName : 'System'
+//     },
+//     {
+//         ID : 'P05',
+//         fName : 'Git',
+//         lName : 'Graph'
+//     },
+// ]
 
 
 export const PlayersContent = () =>{
+    const [players, setPlayers] = useState([])
+
+    useEffect(() => {
+        async function fetchPlayers(){
+            try {
+                const players = await window.api.getAllPlayers();
+                console.log(players)
+                setPlayers(players)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        fetchPlayers()
+    },[])
+
+    const addUserHandler = async(e)=> {
+        e.preventDefault();
+        const ID = "P09";
+        const fName = "Mamy";
+        const lName = "Poko";
+        const user = await window.api.createPlayer({
+            id :ID,
+            first_name :fName,
+            last_name : lName
+        })
+        user !== null ? console.log("User Created") : console.log("error nich");
+    }
     return(
         <Box>
             <Box>
@@ -38,7 +66,7 @@ export const PlayersContent = () =>{
                         Players
                     </Heading>
                     <Spacer/>
-                    <Button bg='transparent' border='1px' borderColor='gray.400'> 
+                    <Button bg='transparent' border='1px' borderColor='gray.400' onClick={addUserHandler}> 
                         <Text fontSize='sm'>
                             Add Player
                         </Text>
@@ -61,8 +89,8 @@ export const PlayersContent = () =>{
                         players.map((player)=>(
                             <Tr>
                                 <Td>{player.ID}</Td>
-                                <Td>{player.fName}</Td>
-                                <Td>{player.lName}</Td>
+                                <Td>{player.first_name}</Td>
+                                <Td>{player.last_name}</Td>
                             </Tr>
                         ))
                     } 

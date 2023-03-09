@@ -19,10 +19,11 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
+    "sqlite3": "^5.1.4",
     "wait-on": "^7.0.1",
     "web-vitals": "^2.1.0"
   },
-  "main": "public/main.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
@@ -30,21 +31,32 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start\"",
-    "electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js",
-    "electron:start": "wait-on tcp:3000 && electron ."
+    "electron:start": "wait-on http://localhost:3000 && electron .",
+    "electron:build": "yarn build && electron-builder",
+    "electron:postinstall": "electron-builder install-app-deps",
+    "electron:pack-app": "yarn build && electron-builder --dir",
+    "electron:pack-build": "electron-builder --dir"
+    
   },
   "build": {
-    "extends": null,
-    "appId": "cpm.example.electron-cra",
+    "appId": "com.kms.pairing-system",
     "files": [
-      "dist/**/*",
-      "build/**/*",
-      "node_modules/**/*",
-      "package.json"
+      "build/**/*"
     ],
     "directories": {
-      "buildResources": "assets"
-    }
+      "buildResources": "build"
+    },
+    "extraResources":[
+      {
+        "from": "./db/",
+        "to": "db/",
+        "filter": [ "**/*" ]
+      }
+    ]
+  },
+  "win": {
+    "icon": "./build/images/smile.ico",
+    "target": ["7z"]
   },
   "eslintConfig": {
     "extends": [

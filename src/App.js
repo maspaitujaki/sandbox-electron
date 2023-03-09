@@ -1,10 +1,11 @@
 import './App.css';
 import { HashRouter, Route, Routes, NavLink } from 'react-router-dom';
 import { TournamentContent } from './components/tournamentContent';
-import { Button, Text, HStack, Stack, Divider, Flex, Spacer, VStack, Input, Accordion, AccordionButton, AccordionItem, Box, AccordionIcon, AccordionPanel, Link} from '@chakra-ui/react';
+import { Button, Text, HStack, Stack, Divider, Flex, Spacer, VStack, Input, Accordion, AccordionButton, AccordionItem, Box, AccordionIcon, AccordionPanel} from '@chakra-ui/react';
 import { PlayersContent } from './components/playersContent';
 function App() {
   console.log(window.location.pathname)
+  
   return (
       <HashRouter>
         <HStack spacing='5' w='95vw' mx={10} my={10}>
