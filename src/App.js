@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes, NavLink } from 'react-router-dom';
 import { TournamentContent } from './components/tournamentContent';
 import { Button, Text, HStack, Stack, Divider, Flex, Spacer, VStack, Input, Accordion, AccordionButton, AccordionItem, Box, AccordionIcon, AccordionPanel} from '@chakra-ui/react';
 import { PlayersContent } from './components/playersContent';
+import { AddPlayerContent } from './components/addPlayerContent';
 function App() {
   console.log(window.location.pathname)
   
@@ -56,7 +57,7 @@ function App() {
 
             <AccordionItem>
               <h2>
-                <NavLink to="/a">
+                <NavLink to="/players">
                   <AccordionButton _expanded={{ bg: 'gray.100'}}>
                     <Box as="span" flex='1' textAlign='left'>
                     <Text as='b' >
@@ -79,7 +80,8 @@ function App() {
           <Stack id="content" w='60vw' alignSelf='flex-start' minH='20vw'px={4} py={4} border='1px' borderColor='gray.400' borderRadius='md'>
               <Routes>
                 <Route exact path='/' element={<TournamentContent/>}/>
-                <Route path='/a' element={<PlayersContent/>}/>
+                <Route path='/players' element={<PlayersContent/>}/>
+                <Route path='/players/add' element={<AddPlayerContent/>}/>
               </Routes>
           </Stack>
         </HStack>

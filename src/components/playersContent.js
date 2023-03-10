@@ -1,5 +1,6 @@
-import { Heading, Box, Divider, TableContainer,Table, TableCaption,Thead,Tr,Th,Tbody,Td,Tfoot, Text, HStack, Button, Spacer} from "@chakra-ui/react"
+import { Heading, Box, Divider, TableContainer,Table,Thead,Tr,Th,Tbody,Td, Text, HStack, Button, Spacer} from "@chakra-ui/react"
 import { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom"
 
 // const players = [
 //     {
@@ -45,19 +46,6 @@ export const PlayersContent = () =>{
         }
         fetchPlayers()
     },[])
-
-    const addUserHandler = async(e)=> {
-        e.preventDefault();
-        const ID = "P09";
-        const fName = "Mamy";
-        const lName = "Poko";
-        const user = await window.api.createPlayer({
-            id :ID,
-            first_name :fName,
-            last_name : lName
-        })
-        user !== null ? console.log("User Created") : console.log("error nich");
-    }
     return(
         <Box>
             <Box>
@@ -66,18 +54,20 @@ export const PlayersContent = () =>{
                         Players
                     </Heading>
                     <Spacer/>
-                    <Button bg='transparent' border='1px' borderColor='gray.400' onClick={addUserHandler}> 
-                        <Text fontSize='sm'>
-                            Add Player
-                        </Text>
-                    </Button>
+                    <NavLink to="/players/add"  >
+                        <Button bg='transparent' border='1px' borderColor='gray.400' boxShadow='md'> 
+                            <Text fontSize='sm'>
+                                Add Player
+                            </Text>
+                        </Button>
+                    </NavLink>
                 </HStack>
                 <Divider mb={4}/>
             </Box>
-            <TableContainer>
+            <TableContainer overflowY="auto" maxHeight='md'>
                 <Table variant='striped' colorScheme='gray' size='sm'>
                     {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
-                        <Thead>
+                        <Thead position="sticky" top={0} bgColor="white">
                             <Tr>
                                 <Th>ID</Th>
                                 <Th>First Name</Th>
@@ -88,7 +78,7 @@ export const PlayersContent = () =>{
                     {
                         players.map((player)=>(
                             <Tr>
-                                <Td>{player.ID}</Td>
+                                <Td>{player.player_id}</Td>
                                 <Td>{player.first_name}</Td>
                                 <Td>{player.last_name}</Td>
                             </Tr>

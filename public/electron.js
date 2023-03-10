@@ -1,30 +1,11 @@
+const { initDB } = require('./db');
 const { app, BrowserWindow, ipcMain } = require('electron'); // electron
 const isDev = require('electron-is-dev'); // To check if electron is in development mode
 const path = require('path');
-const sqlite3 = require('sqlite3');
-
+const { playerServices } = require('./services/playerService');
 let mainWindow;
 
-const db = new sqlite3.Database(
-    isDev
-      ? path.join(__dirname, '../db/prefs.db') // my root folder if in dev mode
-      : path.join(process.resourcesPath, 'db/prefs.db'), // the resources path if in production build
-    (err) => {
-      if (err) {
-        console.log(`Database Error: ${err}`);
-      } else {
-        console.log('Database Loaded');
-      }
-    }
-  );
 
-const initDB = () => {
-  db.run(`CREATE TABLE IF NOT EXISTS player (
-    ID TEXT,
-    first_name TEXT,
-    last_name TEXT
-  )`);
-}
 
 // Initializing the Electron Window
 const createWindow = () => {
@@ -61,39 +42,9 @@ const createWindow = () => {
 // When the app is ready to load
 app.whenReady().then(async () => {
   initDB();
-  ipcMain.handle('create-player', async (event, args) => {
-    try {
-      // insert a new row into the player table
-        db.run(`INSERT INTO player (ID, first_name, last_name) VALUES (?, ?, ?)`,
-          [args.id, args.first_name, args.last_name],
-          (err) => {
-            if (err) {
-              console.log(err.message);
-            }
-            console.log(`A row has been inserted with rowid ${this.lastID}`);
-          }
-        );
-      return 'success';
-    } catch (error) {
-      return error;
-    }
-  });
-  ipcMain.handle('get-all-players', async (event, args) => {
-    try {
-      let rows = await new Promise((resolve, reject) => {
-        db.all(`SELECT * FROM player`, (err, rows) => {
-          if (err) {
-            reject(err.message);
-          }
-          resolve(rows);
-        });
-      });
-      return rows;
-    } catch (error) {
-      console.error(error);
-      throw new Error('Failed to retrieve users');
-    }
-  });
+  playerServices.forEach((service)=>{
+    ipcMain.handle(service.event,service.callback)
+  })
   await createWindow(); // Create the mainWindow
 });
 

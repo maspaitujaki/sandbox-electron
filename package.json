@@ -16,6 +16,7 @@
     "framer-motion": "^10.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.5",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
@@ -36,7 +37,6 @@
     "electron:postinstall": "electron-builder install-app-deps",
     "electron:pack-app": "yarn build && electron-builder --dir",
     "electron:pack-build": "electron-builder --dir"
-    
   },
   "build": {
     "appId": "com.kms.pairing-system",
@@ -46,17 +46,21 @@
     "directories": {
       "buildResources": "build"
     },
-    "extraResources":[
+    "extraResources": [
       {
         "from": "./db/",
         "to": "db/",
-        "filter": [ "**/*" ]
+        "filter": [
+          "**/*"
+        ]
       }
     ]
   },
   "win": {
     "icon": "./build/images/smile.ico",
-    "target": ["7z"]
+    "target": [
+      "7z"
+    ]
   },
   "eslintConfig": {
     "extends": [
