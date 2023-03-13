@@ -1,8 +1,8 @@
-import { Box, Button, Text, FormControl, FormLabel, FormHelperText, Input, HStack, Spacer, useToast } from "@chakra-ui/react"
+import { Box, Button, Text, FormControl, FormLabel, FormHelperText, Input, HStack, Spacer, useToast,Heading, Divider } from "@chakra-ui/react"
 import { NavLink } from "react-router-dom"
 import { useForm } from "react-hook-form"
 
-export const AddPlayerContent = () => {
+export const NewPlayerContent = () => {
     const {
         register,
         handleSubmit,
@@ -40,6 +40,10 @@ export const AddPlayerContent = () => {
     };
     return(
         <Box>
+            <Heading mb={1} mt={1} fontSize='3xl'>
+                Player Information
+            </Heading>
+            <Divider mb={4}/>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl mb={3}>
                     <FormLabel>Player ID</FormLabel>

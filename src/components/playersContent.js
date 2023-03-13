@@ -2,34 +2,6 @@ import { Heading, Box, Divider, TableContainer,Table,Thead,Tr,Th,Tbody,Td, Text,
 import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 
-// const players = [
-//     {
-//         ID : 'P01',
-//         fName : 'Dimas',
-//         lName : 'Muzaki'
-//     },
-//     {
-//         ID : 'P02',
-//         fName : 'Diclo',
-//         lName : 'Fenac'
-//     },
-//     {
-//         ID : 'P03',
-//         fName : 'Diethy',
-//         lName : 'Lamine'
-//     },
-//     {
-//         ID : 'P04',
-//         fName : 'Pairing',
-//         lName : 'System'
-//     },
-//     {
-//         ID : 'P05',
-//         fName : 'Git',
-//         lName : 'Graph'
-//     },
-// ]
-
 
 export const PlayersContent = () =>{
     const [players, setPlayers] = useState([])
@@ -54,7 +26,7 @@ export const PlayersContent = () =>{
                         Players
                     </Heading>
                     <Spacer/>
-                    <NavLink to="/players/add"  >
+                    <NavLink to="/players/new"  >
                         <Button bg='transparent' border='1px' borderColor='gray.400' boxShadow='md'> 
                             <Text fontSize='sm'>
                                 Add Player

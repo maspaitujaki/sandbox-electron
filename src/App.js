@@ -3,7 +3,8 @@ import { HashRouter, Route, Routes, NavLink } from 'react-router-dom';
 import { TournamentContent } from './components/tournamentContent';
 import { Button, Text, HStack, Stack, Divider, Flex, Spacer, VStack, Input, Accordion, AccordionButton, AccordionItem, Box, AccordionIcon, AccordionPanel} from '@chakra-ui/react';
 import { PlayersContent } from './components/playersContent';
-import { AddPlayerContent } from './components/addPlayerContent';
+import { NewPlayerContent } from './components/newPlayerContent';
+import { NewTournamentContent } from './components/newTournamentContent';
 function App() {
   console.log(window.location.pathname)
   
@@ -27,9 +28,15 @@ function App() {
               <AccordionPanel p={2}>
                 <VStack maxW='25vw' alignSelf='flex-start'>
                   <Stack>
-                    <Button whiteSpace="normal" height="auto" blockSize="auto">
-                      <Text padding={2}>New Tournament</Text>
-                    </Button>
+                    <NavLink to="/tournament/new">
+                      <HStack>
+                        <Spacer/>
+                        <Button whiteSpace="normal" height="auto" blockSize="auto" mx="auto">
+                          <Text padding={2}>New Tournament</Text>
+                        </Button>
+                        <Spacer/>
+                      </HStack>
+                    </NavLink>
                     <Divider/>
                     <Flex>
                       <Text>Ongoing</Text>
@@ -81,7 +88,8 @@ function App() {
               <Routes>
                 <Route exact path='/' element={<TournamentContent/>}/>
                 <Route path='/players' element={<PlayersContent/>}/>
-                <Route path='/players/add' element={<AddPlayerContent/>}/>
+                <Route path='/players/new' element={<NewPlayerContent/>}/>
+                <Route path='/tournament/new' element={<NewTournamentContent/>}/>
               </Routes>
           </Stack>
         </HStack>

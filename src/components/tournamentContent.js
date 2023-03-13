@@ -1,7 +1,5 @@
-import { Heading, Box, Divider, Card, CardHeader, Text, CardBody, Icon, HStack} from "@chakra-ui/react"
-import {
-    MdOutlineDateRange,
-  } from 'react-icons/md';
+import { Heading, Box, Divider} from "@chakra-ui/react"
+import { TournamentCard } from "./tournamentCard";
 
 const ongoingTournament = [
     {
@@ -34,19 +32,9 @@ export const TournamentContent = () =>{
                 <Divider mb={4}/>
                 {
                     ongoingTournament.map((tournament)=>(
-                    <Card>
-                        <CardHeader px={2} py={1}>
-                            <Text fontSize='xl' as='b'>
-                                {tournament.name}
-                            </Text>
-                        </CardHeader>
-                        <CardBody px={2} py={0}>
-                            <HStack mb={2}>
-                                <Icon color="gray.500" as={MdOutlineDateRange} boxSize='6'/>
-                                <Text color="gray.400" fontSize='sm'> {tournament.date}</Text>
-                            </HStack>
-                        </CardBody>
-                    </Card>
+                        <TournamentCard
+                        tournament={tournament}
+                        />
                     ))
                 }  
             </Box>
@@ -57,19 +45,9 @@ export const TournamentContent = () =>{
                 <Divider mb={4}/>
                 {
                     createdTournament.map((tournament)=>(
-                    <Card>
-                        <CardHeader px={2} py={1}>
-                            <Text fontSize='xl' as='b'>
-                                {tournament.name}
-                            </Text>
-                        </CardHeader>
-                        <CardBody px={2} py={0}>
-                            <HStack mb={2}>
-                                <Icon color="gray.500" as={MdOutlineDateRange} boxSize='6'/>
-                                <Text color="gray.400" fontSize='sm'> {tournament.date}</Text>
-                            </HStack>
-                        </CardBody>
-                    </Card>
+                    <TournamentCard
+                    tournament={tournament}
+                    />
                     ))
                 }  
             </Box>
@@ -80,19 +58,9 @@ export const TournamentContent = () =>{
                 <Divider mb={4}/>
                 {
                     finishedTournament.map((tournament)=>(
-                    <Card>
-                        <CardHeader px={2} py={1}>
-                            <Text fontSize='xl' as='b'>
-                                {tournament.name}
-                            </Text>
-                        </CardHeader>
-                        <CardBody px={2} py={0}>
-                            <HStack mb={2}>
-                                <Icon color="gray.500" as={MdOutlineDateRange} boxSize='6'/>
-                                <Text color="gray.400" fontSize='sm'> {tournament.date}</Text>
-                            </HStack>
-                        </CardBody>
-                    </Card>
+                    <TournamentCard
+                    tournament={tournament}
+                    />
                     ))
                 }  
             </Box>
